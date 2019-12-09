@@ -43,45 +43,32 @@ function drawHighcharts() {
             type: 'bar',
             styledMode: true,
             spacingBottom: 25,
-            spacingRight: 100
+            spacingRight: 100,
+            spacingLeft: 2,
         }, 
         title: {
             text: null
         },
-        data: {
-            googleSpreadsheetKey: '1YOKb5l2VM4aAB2r20N_1aT_1vEajYrP3U-U3A6lZbC0'
-        },
+        series: [{
+            data: [
+                ['Nasdaq', 279.96],
+                ['S&P 500', 181.23],
+                ['S&P 400 Midcap', 177.47],
+                ['Dow Jones', 167.64],
+                ['Russell 2000', 160.96],
+            ]
+        }],
         // for bar charts only
         plotOptions: {
             series: {
                 groupPadding: 0.1
             } 
         },
-        // for line charts only
-        // plotOptions: {
-        //     series: {
-        //         lineWidth: 1,
-        //         // clip: false,
-        //         marker: {
-        //             enabled: false,
-        //             symbol: 'circle',
-        //             fillColor: '#ffffff',
-        //             states: {
-        //                 hover: {
-        //                     fillColor: '#ffffff'
-        //                 }
-        //             }
-        //         }
-        //     }
-        // },
         legend: {
-            align: 'right',
-            symbolRadius: 0,
-            verticalAlign: 'top',
-            x: 10,
-            itemMarginTop: -10
+            enabled: false
         },
         xAxis: {
+            categories: ['Nasdaq', 'S&P 500', 'S&P 400 Midcap', 'Dow Jones', 'Russell 2000'],
             labels: {
                 style: {
                     whiteSpace: 'nowrap'
@@ -94,14 +81,14 @@ function drawHighcharts() {
             labels: {
                 useHTML: true,
                 overflow: 'allow'
-            }
+            },
+            max: 300,
         },
         credits: {
             enabled: false
         },
         tooltip: {
-            shadow: false,
-            padding: 10
+            pointFormat: 'Return: <b>{point.y:.0f}%</b>'
         },
         responsive: {
             rules: [{
@@ -110,11 +97,14 @@ function drawHighcharts() {
             },
             chartOptions: {
                 chart: {
-                spacingRight: 10
+                spacingRight: 15
                 },
                 legend: {
                     align: 'left',
                     x: -18
+                },
+                yAxis: {
+                    tickAmount: 4
                 },
                 tooltip: {
                     enabled: false
@@ -124,6 +114,7 @@ function drawHighcharts() {
         }
     })
 }
+
 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
     drawHighcharts();
